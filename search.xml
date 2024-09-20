@@ -10,7 +10,7 @@
 
 <h2 id="搭建流程"><a href="#搭建流程" class="headerlink" title="搭建流程"></a>搭建流程</h2><details class="folding-tag" cyan><summary> 点这里 </summary>
               <div class='content'>
-              <div calss='anzhiyu-tag-link'><a class="tag-Link" target="_blank" href=" https://zhuanlan.zhihu.com/p/618864711">    <div class="tag-link-tips">引用站外地址</div>    <div class="tag-link-bottom">        <div class="tag-link-left" style="background-image: url(https://api.iowen.cn/favicon/ https://zhuanlan.zhihu.com/p/618864711.png);"></div>        <div class="tag-link-right">            <div class="tag-link-title">Hexo+Next主题搭建个人博客+优化全过程（完整详细版）</div>            <div class="tag-link-sitename"> https://pic.imgdb.cn/item/641c531ea682492fcc0713a3.jpg</div>        </div>        <i class="fa-solid fa-angle-right"></i>    </div>    </a>
+              <div calss='anzhiyu-tag-link'><a class="tag-Link" target="_blank" href=" /imgs/1.jpg">    <div class="tag-link-tips">引用站外地址</div>    <div class="tag-link-bottom">        <div class="tag-link-left" style="background-image: url(https://api.iowen.cn/favicon/ /imgs/1.jpg.png);"></div>        <div class="tag-link-right">            <div class="tag-link-title">Hexo+Next主题搭建个人博客+优化全过程（完整详细版）</div>            <div class="tag-link-sitename"> https://zhuanlan.zhihu.com/p/618864711</div>        </div>        <i class="fa-solid fa-angle-right"></i>    </div>    </a>
               </div>
             </details>
 <p>原博主已经弃坑Hexo，改用Notion + vercel搭建博客了，不过留下的内容足够详细，可供参考。</p>
