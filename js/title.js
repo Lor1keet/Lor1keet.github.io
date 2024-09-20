@@ -9,9 +9,9 @@ document.addEventListener("visibilitychange", function () {
   } else {
     //返回当前页面时标签显示内容
     document.title = "我即优雅又充满良心";
-    //两秒后变回正常标题
+    //四秒后变回正常标题
     titleTime = setTimeout(function () {
       document.title = OriginTitile;
-    }, 2000);
+    }, 4000);
   }
 });
