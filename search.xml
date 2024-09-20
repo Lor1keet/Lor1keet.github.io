@@ -3,7 +3,8 @@
   <entry>
     <title>从这里开始</title>
     <url>/2024/09/19/%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B/</url>
-    <content><![CDATA[<h1 id="一切从这里开始"><a href="#一切从这里开始" class="headerlink" title="一切从这里开始"></a>一切从这里开始</h1><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Ciallo!&quot;</span>)</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h1 id="一切从这里开始"><a href="#一切从这里开始" class="headerlink" title="一切从这里开始"></a>一切从这里开始</h1><br/>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Ciallo!&quot;</span>)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Life</category>
