@@ -3,13 +3,24 @@
   <entry>
     <title>从这里开始</title>
     <url>/2024/09/19/%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B/</url>
-    <content><![CDATA[<h1 id="一切从这里开始"><a href="#一切从这里开始" class="headerlink" title="一切从这里开始"></a>一切从这里开始</h1><br/>
+    <content><![CDATA[<h1 id="一切从这里开始"><a href="#一切从这里开始" class="headerlink" title="一切从这里开始"></a>一切从这里开始</h1><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Ciallo!&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Ciallo!&quot;</span>)</span><br></pre></td></tr></table></figure>
-<br/>
-粗略完成了blog的搭建，说是搭建，事实上也只是站在前人的肩膀上按部就班地组装hexo这个框架。
+<p>粗略完成了blog的搭建，说是搭建，事实上也只是站在前人的肩膀上按部就班地组装hexo这个框架。为了方便以后更好地维护和查找问题，在下面列出一些至今用到的各类连接。</p>
+<h2 id="Blog搭建"><a href="#Blog搭建" class="headerlink" title="Blog搭建"></a>Blog搭建</h2><p>原博主已经弃坑Hexo,改用Notion + vercel搭建博客了，不过留下的内容足够详细。</p>
+<a class="tag-Link" target="_blank" href="https://zhuanlan.zhihu.com/p/618864711">
+    <div class="tag-link-tips">引用站外地址</div>
+    <div class="tag-link-bottom">
+        <div class="tag-link-left" style="background-image: url(https://api.iowen.cn/favicon/zhuanlan.zhihu.com/p/618864711.png);"></div>
+        <div class="tag-link-right">
+            <div class="tag-link-title">Hexo+Next主题搭建个人博客+优化全过程（完整详细版）</div>
+            <div class="tag-link-sitename">Yuleo</div>
+        </div>
+        <i class="fa-solid fa-angle-right"></i>
+    </div>
+    </a>
 
-<p>为了方便以后更好地维护和查找问题，在下面列出一些搭建至今用到的各类连接。</p>
+
+
 ]]></content>
       <categories>
         <category>Life</category>
