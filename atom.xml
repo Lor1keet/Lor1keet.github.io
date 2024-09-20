@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-09-20T08:23:28.793Z</updated>
+  <updated>2024-09-20T08:37:06.949Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://example.com/2024/09/19/%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B/"/>
     <id>http://example.com/2024/09/19/%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B/</id>
     <published>2024-09-19T13:21:44.000Z</published>
-    <updated>2024-09-20T08:23:28.793Z</updated>
+    <updated>2024-09-20T08:37:06.949Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="一切从这里开始"><a href="#一切从这里开始" class="headerlink" title="一切从这里开始"></a>一切从这里开始</h1><br/><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Ciallo!&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="一切从这里开始"><a href="#一切从这里开始" class="headerlink" title="一切从这里开始"></a>一切从这里开始</h1><br/><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Ciallo!&quot;</span>)</span><br></pre></td></tr></table></figure><br/>粗略完成了blog的搭建，说是搭建，事实上也只是站在前人的肩膀上按部就班地组装hexo这个框架。<p>为了方便以后更好地维护和查找问题，在下面列出一些搭建至今用到的各类连接。</p>]]></content>
     
     
       
