@@ -4,7 +4,7 @@
   <url>
     <loc>http://example.com/2024/09/19/%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B/</loc>
     
-    <lastmod>2024-09-20</lastmod>
+    <lastmod>2024-09-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/home/index-1.html</loc>
+    <loc>http://example.com/home/index.html</loc>
     
     <lastmod>2024-09-20</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/home/index.html</loc>
+    <loc>http://example.com/home/index-1.html</loc>
     
     <lastmod>2024-09-20</lastmod>
     
@@ -67,7 +67,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2024-09-20</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -75,7 +75,7 @@
   
   <url>
     <loc>http://example.com/tags/Hexo/</loc>
-    <lastmod>2024-09-20</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -84,7 +84,7 @@
   
   <url>
     <loc>http://example.com/categories/Hexo/</loc>
-    <lastmod>2024-09-20</lastmod>
+    <lastmod>2024-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
