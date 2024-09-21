@@ -695,9 +695,9 @@ canvas_nest:
 
 # Mouse click effects: fireworks (鼠標點擊效果: 煙火特效)
 fireworks:
-  enable: false
+  enable: true
   zIndex: 9999 # -1 or 9999
-  mobile: false
+  mobile: true
 
 # Mouse click effects: Heart symbol (鼠標點擊效果: 愛心)
 click_heart:
@@ -764,6 +764,9 @@ subtitle:
   # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
   sub: 
   - 踢地跨月
+  - 月亮是无慈悲的金女王
+  - 黄昏黑星
+  - 神赐的台地
 
 # Loading Animation (加載動畫)
 preloader:
