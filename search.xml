@@ -32,8 +32,11 @@
               </div>
             </details>
 
-<div class="tip bell"><p>使用此教程中的链接卡片时，教程中并没有说如何添加默认图片。经网页审查元素发现，头图地址默认指向 https:&#x2F;&#x2F;你的用户名.github.io&#x2F;img&#x2F;link.png<br>如果不想给每个链接都添加一个图片地址，那么可以把图片链接留空，并在 <span class='p red'>根目录&#x2F;soure</span> 下新建一个img文件夹，在文件夹中放入你想要的默认图片，并重命名为 <span class='p red'>link.png</span> 即可</p>
-</div>
+<details class="folding-tag" cyan><summary> 注意事项 </summary>
+              <div class='content'>
+              <div class="tip bell"><p>使用此教程中的链接卡片时，教程中并没有说如何添加默认图片。经网页审查元素发现，头图地址默认指向 <span class='p red'>https:&#x2F;&#x2F;你的用户名.github.io&#x2F;img&#x2F;link.png</span><br>如果不想给每个链接都添加一个图片地址，那么可以把图片链接留空，并在 <span class='p red'>根目录&#x2F;soure</span> 下新建一个img文件夹，在文件夹中放入你想要的默认图片，并重命名为 <span class='p red'>link.png</span> 即可</p></div>
+              </div>
+            </details>
 
 <h3 id="时间轴添加对应生肖"><a href="#时间轴添加对应生肖" class="headerlink" title="时间轴添加对应生肖"></a>时间轴添加对应生肖</h3><details class="folding-tag" cyan><summary> 点这里 </summary>
               <div class='content'>
