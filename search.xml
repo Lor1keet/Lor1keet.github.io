@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexo博客搭建与魔改汇总</title>
+    <url>/2024/09/19/%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<h1 id="一切从这里开始"><a href="#一切从这里开始" class="headerlink" title="一切从这里开始"></a>一切从这里开始</h1><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Ciallo!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<span class='p blue'>粗略完成了blog的搭建，说是搭建，事实上也只是站在前人的肩膀上按部就班地组装hexo这个框架。为了方便以后更好地维护和查找问题，在下面列出一些至今用到的各类连接。</span>
+<del>静态页面太折磨了</del>
+
+<h2 id="搭建流程"><a href="#搭建流程" class="headerlink" title="搭建流程"></a>搭建流程</h2><details class="folding-tag" cyan><summary> 点这里 </summary>
+              <div class='content'>
+              <div class="tag link"><a class="link-card" title="Hexo+Next主题搭建个人博客+优化全过程（完整详细版）" href="https://zhuanlan.zhihu.com/p/618864711"><div class="left"><img src="/img/link.png"/></div><div class="right"><p class="text">Hexo+Next主题搭建个人博客+优化全过程（完整详细版）</p><p class="url">https://zhuanlan.zhihu.com/p/618864711</p></div></a></div>
+              </div>
+            </details>
+<p>原博主已经弃坑Hexo，改用Notion + vercel搭建博客了，不过留下的内容足够详细，可供参考。</p>
+<h2 id="客制化相关"><a href="#客制化相关" class="headerlink" title="客制化相关"></a>客制化相关</h2><h3 id="配置自定义css与js文件"><a href="#配置自定义css与js文件" class="headerlink" title="配置自定义css与js文件"></a>配置自定义css与js文件</h3><details class="folding-tag" cyan><summary> 点这里 </summary>
+              <div class='content'>
+              <div class="tag link"><a class="link-card" title="Hexo博客添加自定义css和js文件" href="https://blog.leonus.cn/2022/custom.html"><div class="left"><img src="/img/link.png"/></div><div class="right"><p class="text">Hexo博客添加自定义css和js文件</p><p class="url">https://blog.leonus.cn/2022/custom.html</p></div></a></div>
+              </div>
+            </details>
+
+<h3 id="首页文章滑动卡片布局"><a href="#首页文章滑动卡片布局" class="headerlink" title="首页文章滑动卡片布局"></a>首页文章滑动卡片布局</h3><details class="folding-tag" cyan><summary> 点这里 </summary>
+              <div class='content'>
+              <div class="tag link"><a class="link-card" title="双栏布局首页卡片魔改教程" href="https://akilar.top/posts/d6b69c49/"><div class="left"><img src="/img/link.png"/></div><div class="right"><p class="text">双栏布局首页卡片魔改教程</p><p class="url">https://akilar.top/posts/d6b69c49/</p></div></a></div>
+              </div>
+            </details>
+
+<h3 id="外挂标签PLUS"><a href="#外挂标签PLUS" class="headerlink" title="外挂标签PLUS"></a>外挂标签PLUS</h3><details class="folding-tag" cyan><summary> 点这里 </summary>
+              <div class='content'>
+              <div class="tag link"><a class="link-card" title="Tag Plugins Plus" href="https://akilar.top/posts/615e2dec/"><div class="left"><img src="/img/link.png"/></div><div class="right"><p class="text">Tag Plugins Plus</p><p class="url">https://akilar.top/posts/615e2dec/</p></div></a></div>
+              </div>
+            </details>
+
+<details class="folding-tag" cyan><summary> 注意事项 </summary>
+              <div class='content'>
+              <div class="tip bell"><p>使用此教程中的链接卡片时，教程中并没有说如何添加默认图片。经网页审查元素发现，头图地址默认指向 <span class='p red'>https:&#x2F;&#x2F;你的用户名.github.io&#x2F;img&#x2F;link.png</span><br>如果不想给每个链接都添加一个图片地址，那么可以把图片链接留空，并在 <span class='p red'>根目录&#x2F;soure</span> 下新建一个img文件夹，在文件夹中放入你想要的默认图片，并重命名为 <span class='p red'>link.png</span> 即可</p></div>
+              </div>
+            </details>
+
+<h3 id="时间轴添加对应生肖"><a href="#时间轴添加对应生肖" class="headerlink" title="时间轴添加对应生肖"></a>时间轴添加对应生肖</h3><details class="folding-tag" cyan><summary> 点这里 </summary>
+              <div class='content'>
+              <div class="tag link"><a class="link-card" title="Archive Beautify" href="https://akilar.top/posts/22257072/"><div class="left"><img src="/img/link.png"/></div><div class="right"><p class="text">Archive Beautify</p><p class="url">https://akilar.top/posts/22257072/</p></div></a></div>
+              </div>
+            </details>
+
+<h3 id="入站Loading动画"><a href="#入站Loading动画" class="headerlink" title="入站Loading动画"></a>入站Loading动画</h3><details class="folding-tag" cyan><summary> 点这里 </summary>
+              <div class='content'>
+              <div class="tag link"><a class="link-card" title="Heo同款loading动画" href="https://blog.anheyu.com/posts/52d8.html"><div class="left"><img src="/img/link.png"/></div><div class="right"><p class="text">Heo同款loading动画</p><p class="url">https://blog.anheyu.com/posts/52d8.html</p></div></a></div>
+              </div>
+            </details>
+
+<h3 id="页面切换时更改网站标题"><a href="#页面切换时更改网站标题" class="headerlink" title="页面切换时更改网站标题"></a>页面切换时更改网站标题</h3><details class="folding-tag" cyan><summary> 点这里 </summary>
+              <div class='content'>
+              <div class="tag link"><a class="link-card" title="网站恶搞标题" href="https://www.fomal.cc/posts/d1927166.html#%E7%BD%91%E7%AB%99%E6%81%B6%E6%90%9E%E6%A0%87%E9%A2%98"><div class="left"><img src="/img/link.png"/></div><div class="right"><p class="text">网站恶搞标题</p><p class="url">https://www.fomal.cc/posts/d1927166.html#%E7%BD%91%E7%AB%99%E6%81%B6%E6%90%9E%E6%A0%87%E9%A2%98</p></div></a></div>
+              </div>
+            </details>
+
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">//动态标题</span><br><span class="line">var OriginTitile = document.title;</span><br><span class="line">var titleTime;</span><br><span class="line">document.addEventListener(<span class="string">&quot;visibilitychange&quot;</span>, function () &#123;</span><br><span class="line">  <span class="keyword">if</span> (document.hidden) &#123;</span><br><span class="line">    //离开当前页面时标签显示内容</span><br><span class="line">    document.title = <span class="string">&quot;再会了，雷狼龙&quot;</span>;</span><br><span class="line">    clearTimeout(titleTime);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    //返回当前页面时标签显示内容</span><br><span class="line">    document.title = <span class="string">&quot;我即优雅又充满良心&quot;</span>;</span><br><span class="line">    //四秒后变回正常标题</span><br><span class="line">    titleTime = setTimeout(function () &#123;</span><br><span class="line">      document.title = OriginTitile;</span><br><span class="line">    &#125;, <span class="number">4000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+</search>

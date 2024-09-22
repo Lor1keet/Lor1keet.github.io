@@ -1,0 +1,39 @@
+svg.icon {
+    /* 这里定义svg.icon，避免和Butterfly自带的note标签冲突 */
+     width: 1em; height: 1em;
+     /* width和height定义图标的默认宽度和高度*/
+     vertical-align: -0.15em;
+     fill: currentColor;
+     overflow: hidden;
+  }
+
+  /* 文章页H1-H6图标样式效果 */
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  -webkit-animation: ccc 1.6s linear infinite;
+  animation: ccc 1.6s linear infinite;
+}
+@-webkit-keyframes ccc {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-1turn);
+    transform: rotate(-1turn);
+  }
+}
+@keyframes ccc {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-1turn);
+    transform: rotate(-1turn);
+  }
+}
