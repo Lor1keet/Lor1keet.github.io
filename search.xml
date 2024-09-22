@@ -3,7 +3,7 @@
   <entry>
     <title>RL算法之DQN与Dueling DQN</title>
     <url>/2024/09/22/DQN/</url>
-    <content><![CDATA[<h1 id="DQN"><a href="#DQN" class="headerlink" title="DQN"></a>DQN</h1><p>DQN（Deep Q Network）是 Q-Learning 的神经网络形式，相比于普通的Q-Learning，它做出了如下的改进与性能优化：</p>
+    <content><![CDATA[<h1 id="DQN"><a href="#DQN" class="headerlink" title="DQN"></a>DQN</h1><p>  DQN（Deep Q Network）是 Q-Learning 的神经网络形式，相比于普通的Q-Learning，它做出了如下的改进与性能优化：</p>
 <ul>
 <li><p>使用两个独立的神经网络：目标Q网络与当前Q网络，通过最小化损失函数来更新当前Q网络，当更新到达一定次数后，再更新目标Q网络。 </p>
 </li>
