@@ -7,7 +7,7 @@ http://example.com/home/index.html
 http://example.com/archives/index.html
 http://example.com/categories/index.html
 http://example.com/
-http://example.com/tags/Reinforce-Learing/
 http://example.com/tags/Hexo/
-http://example.com/categories/Reinforce-Learing/
+http://example.com/tags/Reinforce-Learing/
 http://example.com/categories/Hexo/
+http://example.com/categories/Reinforce-Learing/
