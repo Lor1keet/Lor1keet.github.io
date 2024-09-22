@@ -344,8 +344,8 @@ rightside_item_order:
 
 # MathJax
 mathjax:
-  enable: false
-  per_page: false
+  enable: true
+  per_page: true
 
 # KaTeX
 katex:
@@ -721,10 +721,10 @@ display_mode: light
 
 # Beautify (美化頁面顯示)
 beautify:
-  enable: false
+  enable: true
   field: post # site/post
-  title-prefix-icon: # '\f0c1'
-  title-prefix-icon-color: # '#F47466'
+  title-prefix-icon: '\f863'
+  title-prefix-icon-color: "#F47466"
 
 # Global font settings
 # Don't modify the following settings unless you know how they work (非必要不要修改)
@@ -919,6 +919,7 @@ inject:
    - <link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'">
    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhheo/JS-Heo@master/mainColor/heoMainColor.css">
    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zhheo/JS-Heo@main/tag-link/tag-link.css">
+   - <link rel="stylesheet" href="/css/windmill.css?1">
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
    - <script async src="//at.alicdn.com/t/font_2264842_3izu8i5eoc2.js"></script>
