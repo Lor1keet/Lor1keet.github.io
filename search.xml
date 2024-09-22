@@ -4,12 +4,12 @@
     <title>RL算法之DQN与Dueling DQN</title>
     <url>/2024/09/22/DQN/</url>
     <content><![CDATA[<h1 id="DQN"><a href="#DQN" class="headerlink" title="DQN"></a>DQN</h1><p>DQN（Deep Q Network）是 Q-Learning 的神经网络形式，相比于普通的Q-Learning，它做出了如下的改进与性能优化：</p>
-<div class='checkbox'><input type="radio" />
-            <p>使用两个独立的神经网络：目标Q网络与当前Q网络，通过最小化损失函数来更新当前Q网络，当更新到达一定次数后，再更新目标Q网络。</p>
-            </div>
-<div class='checkbox'><input type="radio" />
-            <p>引入经验回放池，将智能体的信息记录下来，并存储在一个回放缓冲区中。<br> 在训练时，从回放缓冲区中随机抽取一小批数据进行训练。这使样本满足独立假设，并提高样本的效率，每一个样本可以被使用多次，十分适合神经网络的梯度学习。</p>
-            </div>
+<ul>
+<li><p>使用两个独立的神经网络：目标Q网络与当前Q网络，通过最小化损失函数来更新当前Q网络，当更新到达一定次数后，再更新目标Q网络。 </p>
+</li>
+<li><p>引入经验回放池，将智能体的信息记录下来，并存储在一个回放缓冲区中。在训练时，从回放缓冲区中随机抽取一小批数据进行训练。这使样本满足独立假设，并提高样本的效率，每一个样本可以被使用多次，十分适合神经网络的梯度学习。</p>
+</li>
+</ul>
 <h2 id="DQN网络的更新原则"><a href="#DQN网络的更新原则" class="headerlink" title="DQN网络的更新原则"></a>DQN网络的更新原则</h2><p>简单来说，DQN的更新是为了最小化这么一个损失函数：</p>
 <script type="math/tex; mode=display">
 L(\theta) = \mathbb{E}_{(s, a, r, s')} \left[ \left( r + \gamma \max_{a'} Q_{\text{target}}(s', a'; \theta_{\text{target}}) - Q(s, a; \theta) \right)^2 \right]</script><p>其中：</p>
