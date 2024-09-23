@@ -17,15 +17,15 @@ J(\theta)=\mathbb{E}\left[\sum_{t=0}^\infty\gamma^tR_{t+1}\right]</script><p>其
 <h2 id="REINFORECE算法"><a href="#REINFORECE算法" class="headerlink" title="REINFORECE算法"></a>REINFORECE算法</h2><p>先对目标函数求梯度</p>
 <script type="math/tex; mode=display">\nabla_\theta J(\theta)=\nabla_\theta\mathbb{E}\left[\sum_{t=0}^\infty\gamma^tR_{t+1}\right]</script><p>可以写成如下的形式</p>
 <script type="math/tex; mode=display">\nabla_\theta J(\theta)=\sum_{s\in\mathcal{S}}\eta(s)\sum_{a\in\mathcal{A}}\nabla_\theta\pi(a|s,\theta)q_\pi(s,a)=\mathbb{E}\big[\nabla_\theta\ln\pi(A|S,\theta)q_\pi(S,A)\big]</script><p>我们要知道这个式子的expectation，而在实际情况中，我们是无法得到的。但根据stochastic gradient descent的基本思路，我们可以用采样来近似这个expectation，得到</p>
-<script type="math/tex; mode=display">\nabla_{\theta}J(\theta){\approx}\nabla_{\theta}\ln\pi(a|s,\theta)q_{\pi}(s,a)</script><p>由于$q<em>\pi$是未知的，我们可以把$q</em>\pi$替换成$q_t$</p>
-<script type="math/tex; mode=display">\theta_{t+1}=\theta_t+\alpha\nabla_\theta\ln\pi(a_t|s_t,\theta_t)q_t(s_t,a_t)</script><p>为了使$q<em>t$能近似$q</em>{\pi}$，我们采取Monte-Carlo方法</p>
-<script type="math/tex; mode=display">q_t(s_t, a_t) = \sum_{k=t+1}^{T} \gamma^{k-t-1} r_k</script><p>得到的这样一个算法便称为REINFORCE。</p>
+<script type="math/tex; mode=display">\nabla_{\theta}J(\theta){\approx}\nabla_{\theta}\ln\pi(a|s,\theta)q_{\pi}(s,a)</script><p>可以把$q_\pi$替换成$q_t$</p>
+<script type="math/tex; mode=display">\theta_{t+1}=\theta_t+\alpha\nabla_\theta\ln\pi(a_t|s_t,\theta_t)q_t(s_t,a_t)</script><p>采取Monte-Carlo方法</p>
+<script type="math/tex; mode=display">q_t(s_t, a_t)=\sum_{k=t+1}^{T}\gamma^{k-t-1}r_k</script><p>得到的这样一个算法便称为REINFORCE。</p>
 <h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><p>REINFORCE算法的伪代码</p>
 <p><strong>Pseudocode: Policy Gradient by Monte Carlo (REINFORCE)</strong></p>
 <p><strong>Initialization:</strong> A parameterized function $\pi(a|s,\theta)$, $\gamma \in (0, 1)$, and $\alpha &gt; 0$.</p>
 <p><strong>Aim:</strong> Search for an optimal policy maximizing $J(\theta)$.</p>
 <p>For the $k^{th}$ iteration, do</p>
-<p>Select $s<em>0$ and generate an episode following<br>$\pi(\theta_k)$.<br>Suppose the episode is ${s_0, a_0, r_1,…, s</em>{T-1}, a_{T-1}, r_T}$.</p>
+<p>Select $s<em>0$ and generate an episode following $\pi(\theta_k)$.<br>Suppose the episode is ${s_0, a_0, r_1,…, s</em>{T-1}, a_{T-1}, r_T}$.</p>
 <p>For $(t = 0, 1, … , T-1)$, do</p>
 <ul>
 <li><strong>Value update:</strong><br>$q<em>t(s_t,a_t)=\sum</em>{k=t+1}^T\gamma^{k-t-1}r_k$</li>
