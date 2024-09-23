@@ -50,23 +50,22 @@ $$\delta_t=q_t(s_t,a_t)-v_t(s_t)\to r_{t+1}+\gamma v_t(s_{t+1})-v_t(s_t)$$
 
 **Aim**: Search for an optimal policy by maximizing $J(\theta)$.
 
-At time step $t$ in each episode, do  
-Generate $a_t$ following $\pi(a | s_t, \theta_t)$ and then observe $r_{t+1}, s_{t+1}$.
+At time step $t$ in each episode, do 
 
-**TD error (advantage function):**
-$
-\delta_t = r_{t+1} + \gamma v(s_{t+1}, w_t) - v(s_t, w_t)
-$
+&nbsp;&nbsp;&nbsp;&nbsp;Generate $a_t$ following $\pi(a | s_t, \theta_t)$ and then observe $r_{t+1}, s_{t+1}$.
 
-**Critic (value update):**
-$
-w_{t+1} = w_t + \alpha_w \delta_t \nabla_w v(s_t, w_t)
-$
+&nbsp;&nbsp;&nbsp;&nbsp;**TD error (advantage function):**
 
-**Actor (policy update):**
-$
-\theta_{t+1} = \theta_t + \alpha_\theta \delta_t \nabla_\theta \ln \pi(a_t | s_t, \theta_t)
-$
+&nbsp;&nbsp;&nbsp;&nbsp;$\delta_t = r_{t+1} + \gamma v(s_{t+1}, w_t) - v(s_t, w_t)$
+
+&nbsp;&nbsp;&nbsp;&nbsp;**Critic (value update):**
+
+&nbsp;&nbsp;&nbsp;&nbsp;$w_{t+1} = w_t + \alpha_w \delta_t \nabla_w v(s_t, w_t)$
+
+&nbsp;&nbsp;&nbsp;&nbsp;**Actor (policy update):**
+
+&nbsp;&nbsp;&nbsp;&nbsp;$\theta_{t+1} = \theta_t + \alpha_\theta \delta_t \nabla_\theta \ln \pi(a_t | s_t, \theta_t)$
+
 
 ### 代码实现
 - 过两天补
