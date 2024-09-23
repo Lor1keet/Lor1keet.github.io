@@ -1,49 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>RL算法之策略梯度算法（Policy Gradient Algorithm)</title>
-    <url>/2024/09/23/AC/</url>
-    <content><![CDATA[<h1 id="策略梯度算法的基本概念"><a href="#策略梯度算法的基本概念" class="headerlink" title="策略梯度算法的基本概念"></a>策略梯度算法的基本概念</h1><p>策略梯度算法（Policy Gradient Algorithm）是一种直接优化策略的方法。与基于值函数的方法（如DQN）不同，策略梯度算法直接对策略进行参数化，并通过优化一个目标函数（通常是期望回报）来学习最优策略。</p>
-<p>策略梯度算法的基本思想是：通过优化策略的参数，使得在与环境交互时，智能体能够获得最大化的累积回报。</p>
-<h2 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h2><p>策略梯度算法是为了优化这么一个目标函数：</p>
-<script type="math/tex; mode=display">
-J(\theta)=\mathbb{E}\left[\sum_{t=0}^\infty\gamma^tR_{t+1}\right]</script><p>其中：</p>
-<ul>
-<li>$π_{\theta}$​表示当前参数化的策略</li>
-<li>$γ$是折扣因子</li>
-<li>$R_{t+1}$是智能体在时间t时执行动作得到的reward</li>
-</ul>
-<p>且可以证明，$J(\theta)=\overline{V_{\pi}}$</p>
-<h2 id="REINFORECE算法"><a href="#REINFORECE算法" class="headerlink" title="REINFORECE算法"></a>REINFORECE算法</h2><p>先对目标函数求梯度</p>
-<script type="math/tex; mode=display">\nabla_\theta J(\theta)=\nabla_\theta\mathbb{E}\left[\sum_{t=0}^\infty\gamma^tR_{t+1}\right]</script><p>可以写成如下的形式</p>
-<script type="math/tex; mode=display">\nabla_\theta J(\theta)=\sum_{s\in\mathcal{S}}\eta(s)\sum_{a\in\mathcal{A}}\nabla_\theta\pi(a|s,\theta)q_\pi(s,a)=\mathbb{E}\big[\nabla_\theta\ln\pi(A|S,\theta)q_\pi(S,A)\big]</script><p>我们要知道这个式子的expectation，而在实际情况中，我们是无法得到的。但根据stochastic gradient descent的基本思路，我们可以用采样来近似这个expectation，得到</p>
-<script type="math/tex; mode=display">\nabla_{\theta}J(\theta){\approx}\nabla_{\theta}\ln\pi(a|s,\theta)q_{\pi}(s,a)</script><p>可以把$q_\pi$替换成$q_t$</p>
-<script type="math/tex; mode=display">\theta_{t+1}=\theta_t+\alpha\nabla_\theta\ln\pi(a_t|s_t,\theta_t)q_t(s_t,a_t)</script><p>采取Monte-Carlo方法</p>
-<script type="math/tex; mode=display">q_t(s_t, a_t)=\sum_{k=t+1}^{T}\gamma^{k-t-1}r_k</script><p>得到的这样一个算法便称为REINFORCE。</p>
-<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><p>REINFORCE算法的伪代码</p>
-<p><strong>Pseudocode: Policy Gradient by Monte Carlo (REINFORCE)</strong></p>
-<p><strong>Initialization:</strong> A parameterized function $\pi(a|s,\theta)$, $\gamma \in (0, 1)$, and $\alpha &gt; 0$.</p>
-<p><strong>Aim:</strong> Search for an optimal policy maximizing $J(\theta)$.</p>
-<p>For the $k^{th}$ iteration, do</p>
-<p>Select $s<em>0$ and generate an episode following $\pi(\theta_k)$.<br>Suppose the episode is ${s_0, a_0, r_1,…, s</em>{T-1}, a_{T-1}, r_T}$.</p>
-<p>For $(t = 0, 1, … , T-1)$, do</p>
-<ul>
-<li><strong>Value update:</strong><br>$q<em>t(s_t,a_t)=\sum</em>{k=t+1}^T\gamma^{k-t-1}r_k$</li>
-<li><strong>Policy update:</strong><br>$\theta<em>{t+1}=\theta_t+\alpha\nabla</em>\theta\ln\pi(a_t|s_t,\theta_t)q_t(s_t,a_t)$</li>
-</ul>
-<p>$\theta_k = \theta_T$</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ul>
-<li>过两天补</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Reinforce Learing</category>
-      </categories>
-      <tags>
-        <tag>Reinforce Learing</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RL算法之DQN与Dueling DQN</title>
     <url>/2024/09/22/DQN/</url>
     <content><![CDATA[<h1 id="DQN"><a href="#DQN" class="headerlink" title="DQN"></a>DQN</h1><p>  DQN（Deep Q Network）是 Q-Learning 的神经网络形式，相比于普通的Q-Learning，它做出了如下的改进与性能优化：</p>
@@ -102,6 +59,48 @@ L(\theta) = \mathbb{E}_{(s, a, r, s')} \left[ \left( r + \gamma \max_{a'} Q_{\te
 <div class='checkbox checked'><input type="radio" checked="checked"/>
             <p>环境的改变后的代码待补充…还没做</p>
             </div>
+]]></content>
+      <categories>
+        <category>Reinforce Learing</category>
+      </categories>
+      <tags>
+        <tag>Reinforce Learing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RL算法之策略梯度算法（Policy Gradient Algorithm)</title>
+    <url>/2024/09/23/AC/</url>
+    <content><![CDATA[<h1 id="策略梯度算法的基本概念"><a href="#策略梯度算法的基本概念" class="headerlink" title="策略梯度算法的基本概念"></a>策略梯度算法的基本概念</h1><p>策略梯度算法（Policy Gradient Algorithm）是一种直接优化策略的方法。与基于值函数的方法（如DQN）不同，策略梯度算法直接对策略进行参数化，并通过优化一个目标函数（通常是期望回报）来学习最优策略。</p>
+<p>策略梯度算法的基本思想是：通过优化策略的参数，使得在与环境交互时，智能体能够获得最大化的累积回报。</p>
+<h2 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h2><p>策略梯度算法是为了优化这么一个目标函数：</p>
+<script type="math/tex; mode=display">J(\theta)=\mathbb{E}\left[\sum_{t=0}^\infty\gamma^tR_{t+1}\right]</script><p>其中：</p>
+<ul>
+<li>$π_{\theta}$​表示当前参数化的策略</li>
+<li>$γ$是折扣因子</li>
+<li>$R_{t+1}$是智能体在时间t时执行动作得到的reward</li>
+</ul>
+<p>且可以证明，$J(\theta)=\overline{V_{\pi}}$</p>
+<h2 id="REINFORECE算法"><a href="#REINFORECE算法" class="headerlink" title="REINFORECE算法"></a>REINFORECE算法</h2><p>先对目标函数求梯度</p>
+<script type="math/tex; mode=display">\nabla_\theta J(\theta)=\nabla_\theta\mathbb{E}\left[\sum_{t=0}^\infty\gamma^tR_{t+1}\right]</script><p>可以写成如下的形式</p>
+<script type="math/tex; mode=display">\nabla_\theta J(\theta)=\sum_{s\in\mathcal{S}}\eta(s)\sum_{a\in\mathcal{A}}\nabla_\theta\pi(a|s,\theta)q_\pi(s,a)=\mathbb{E}\big[\nabla_\theta\ln\pi(A|S,\theta)q_\pi(S,A)\big]</script><p>我们要知道这个式子的expectation，而在实际情况中，我们是无法得到的。但根据stochastic gradient descent的基本思路，我们可以用采样来近似这个expectation，得到</p>
+<script type="math/tex; mode=display">\nabla_{\theta}J(\theta){\approx}\nabla_{\theta}\ln\pi(a|s,\theta)q_{\pi}(s,a)</script><p>可以把$q_\pi$替换成$q_t$</p>
+<script type="math/tex; mode=display">\theta_{t+1}=\theta_t+\alpha\nabla_\theta\ln\pi(a_t|s_t,\theta_t)q_t(s_t,a_t)</script><p>采取Monte-Carlo方法</p>
+<script type="math/tex; mode=display">q_t(s_t, a_t)=\sum_{k=t+1}^{T}\gamma^{k-t-1}r_k</script><p>得到的这样一个算法便称为REINFORCE。</p>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><p>REINFORCE算法的伪代码</p>
+<p><strong>Pseudocode: Policy Gradient by Monte Carlo (REINFORCE)</strong></p>
+<p><strong>Initialization:</strong> A parameterized function $\pi(a|s,\theta)$, $\gamma\in(0, 1)$, and $\alpha&gt;0$.</p>
+<p><strong>Aim:</strong> Search for an optimal policy maximizing $J(\theta)$.</p>
+<p>For the $k^{th}$ iteration, do</p>
+<p>Select $s<em>0$ and generate an episode following $\pi(\theta_k)$.<br>Suppose the episode is ${s_0,a_0,r_1,\ldots,s</em>{T-1},a_{T-1},r_T}$.</p>
+<p>For $(t = 0, 1,\ldots, T-1)$, do</p>
+<ul>
+<li><strong>Value update:</strong><br>$q<em>t(s_t,a_t)=\sum</em>{k=t+1}^T\gamma^{k-t-1}r_k$</li>
+<li><strong>Policy update:</strong><br>$\theta<em>{t+1}=\theta_t+\alpha\nabla</em>\theta\ln\pi(a_t|s_t,\theta_t)q_t(s_t,a_t)$</li>
+</ul>
+<p>$\theta_k = \theta_T$</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ul>
+<li>过两天补</li>
+</ul>
 ]]></content>
       <categories>
         <category>Reinforce Learing</category>
