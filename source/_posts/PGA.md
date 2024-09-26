@@ -74,5 +74,135 @@ For the $k^{th}$ iteration, do
 &nbsp;&nbsp;&nbsp;&nbsp;$\theta_k = \theta_T$
 
 ### 代码实现
-- 过两天补
+#### 定义PolicyNet
+```py
+class PolicyNet(torch.nn.Module):
+    def __init__(self,state_dim,hidden_dim,action_dim):
+        super(PolicyNet,self).__init__()
+        self.fc1 = torch.nn.Linear(state_dim, hidden_dim)
+        self.fc2 = torch.nn.Linear(hidden_dim, action_dim)
 
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        # softmax()函数实现数据在(0,1)上的归一化
+        return F.softmax(self.fc2(x), dim=1)
+```
+
+#### 定义REINFORCE算法
+```py
+class REINFORCE:
+    def __init__(self,state_dim,hidden_dim,action_dim,learning_rate,gamma,device):
+        self.policy_net = R_Net.PolicyNet(state_dim,hidden_dim,action_dim).to(device)
+        self.optimizer = torch.optim.Adam(self.policy_net.parameters(),lr=learning_rate)
+        self.gamma = gamma
+        self.device = device
+
+    def take_action(self,state):
+        state = torch.tensor([state],dtype=torch.float).to(self.device)
+        probs = self.policy_net(state)
+        # 创建一个类别分布
+        action_dist = torch.distributions.Categorical(probs)
+        action = action_dist.sample()
+        return action.item()
+    
+    def update(self,transition_dict):
+        reward_list = transition_dict['rewards']
+        state_list = transition_dict['states']
+        action_list = transition_dict['actions']
+
+        G = 0
+        self.optimizer.zero_grad()
+        # 反向遍历
+        for i in reversed(range(len(reward_list))):  
+            reward = reward_list[i]
+            state = torch.tensor([state_list[i]],
+                                 dtype=torch.float).to(self.device)
+            action = torch.tensor([action_list[i]]).view(-1, 1).to(self.device)
+            log_prob = torch.log(self.policy_net(state).gather(1, action))
+            # 最后一个时间步开始反向遍历奖励列表，这样可以逐步累积reward
+            G = self.gamma * G + reward
+            # 每一步的损失函数
+            loss = -log_prob * G
+            loss.backward() 
+        # 对每个参数做梯度下降
+        self.optimizer.step()
+```
+#### 开始训练
+```py
+learning_rate = 1e-3
+num_episodes = 1000
+hidden_dim = 128
+gamma = 0.98
+
+device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+
+env_name = 'CartPole-v0'
+env = gym.make(env_name)
+random.seed(0)
+np.random.seed(0)
+env.reset(seed=0)
+torch.manual_seed(0)
+# 获取状态
+state_dim = env.observation_space.shape[0]
+# 获取动作空间的维度
+action_dim = env.action_space.n
+
+agent = R_Algorithm.REINFORCE(state_dim, hidden_dim, action_dim, learning_rate, gamma,
+                  device)
+
+return_list = []
+for i in range(10):
+    with tqdm(total=int(num_episodes / 10), desc='Iteration %d' % i) as pbar:
+        for i_episode in range(int(num_episodes / 10)):
+            episode_return = 0
+            transition_dict = {
+                'states': [],
+                'actions': [],
+                'next_states': [],
+                'rewards': [],
+                'dones': []
+            }
+            state = env.reset()
+            state = state[0]
+            done = False
+            while not done:
+                action = agent.take_action(state)
+                next_state, reward, done, truncated, _ = env.step(action)
+                done = done or truncated
+                transition_dict['states'].append(state)
+                transition_dict['actions'].append(action)
+                transition_dict['next_states'].append(next_state)
+                transition_dict['rewards'].append(reward)
+                transition_dict['dones'].append(done)
+                state = next_state
+                episode_return += reward
+            return_list.append(episode_return)
+            agent.update(transition_dict)
+            if (i_episode + 1) % 10 == 0:
+                pbar.set_postfix({
+                    'episode':
+                    '%d' % (num_episodes / 10 * i + i_episode + 1),
+                    'return':
+                    '%.3f' % np.mean(return_list[-10:])
+                })
+            pbar.update(1)
+
+episodes_list = list(range(len(return_list)))
+plt.plot(episodes_list, return_list)
+plt.xlabel('Episodes')
+plt.ylabel('Returns')
+plt.title('REINFORCE on {}'.format(env_name))
+plt.show()
+
+mv_return = rl_utils.moving_average(return_list, 9)
+plt.plot(episodes_list, mv_return)
+plt.xlabel('Episodes')
+plt.ylabel('Returns')
+plt.title('REINFORCE on {}'.format(env_name))
+plt.show()
+```
+运行代码，得到策略总回报Return与训练次数Episode的关系图
+
+{% image https://pic.imgdb.cn/item/66f2605df21886ccc099c689.png, width=400px %}
+
+可以看到，随着收集到的轨迹越来越多，REINFORCE算法有效地学习到了最优策略。不过，相比于前面的DQN算法，REINFORCE算法使用了更多的序列，这是因为REINFORCE算法是一个在线策略算法，之前收集到的轨迹数据不会被再次利用。此外，REINFORCE算法的性能也有一定程度的波动，这主要是因为每条采样轨迹的回报值波动比较大，这也是REINFORCE算法主要的不足。
