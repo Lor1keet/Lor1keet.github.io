@@ -36,24 +36,23 @@ $$Q_1=\mathbf{h}_iW_1^Q,\quad Q_2=\mathbf{h}_iW_2^Q,\quad\ldots,\quad Q_8=\mathb
 $$K_1=\mathbf{h}_iW_1^K,\quad K_2=\mathbf{h}_iW_2^K,\quad\ldots,\quad K_8=\mathbf{h}_iW_8^K$$
 $$V_1=\mathbf{h}_iW_1^V,\quad V_2=\mathbf{h}_iW_2^V,\quad\ldots,\quad V_8=\mathbf{h}_iW_8^V$$
 
-每个输入向量就被分成了属于$Q$、$K$、$V$的各八个头。然后每个头的查询向量 $Q_{i}^{(s)}$ 与所有其他头的键向量 $K_{i}^{(s)}$ 计算点积后除以维度的根号并取 $softmax$ 函数，再与值向量点积得到
-$$\mathrm{head}_{ij}=\mathrm{softmax}\left(\frac{Q_i^{(s)}K_j^{(s)^\top}}{\sqrt{d_k}}\right)V_j^{(s)}$$
+每个输入向量就被分成了属于 $Q$、 $K$、 $V$ 的各八个头。然后每个头的查询向量 $Q_{i}^{(s)}$ 与所有其他头的键向量 $K_{i}^{(s)}$ 计算点积后除以维度的根号并取 $softmax$ 函数，再与值向量点积得到
+$$\mathrm{h}_{ij}=\mathrm{softmax}\left(\frac{Q_i^{(s)}K_j^{(s)^\top}}{\sqrt{d_k}}\right)V_j^{(s)}$$
 
-其中 $(s=0,1,...,7)$，$(i，j=0,1...,n)$
+其中 $(s=0,1,...,7)$，$(i，j=0,1...,n)$，除以维度的根号是防止得到的值过大。
 
-除以维度的根号是防止得到的值过大
-
-每个头的自注意力都计算完后，将每个输入的八个头拼起来
-$$\mathrm{MHA}_i^\ell\left(\mathrm{h}_1^{(\ell-1)},\ldots,\mathrm{h}_n^{(\ell-1)}\right) = concat(head_{i1},...,head_{in})$$
+每个头的输出计算完成后，将每个头的输出进行线性变换后相加得到最终输出
+$$\mathrm{MHA}_i(\mathrm{h}_1,\ldots,\mathrm{h}_n)=\sum_{m=1}^MW_m^O\mathrm{h}_{im}^{\prime}$$
+其中 $W_{m}^{O}$ 是一个用于将每个注意力头的输出 $\mathrm{h}_{im}$ 转换回原始维度 $d_h$ 的线性变换矩阵。
 
 再进行 skip-connection（跳跃连接）与 BN（Batch Normalization）
 
 $$\begin{aligned}
 \hat{\mathbf{h}}_{i}& =\mathrm{BN}^\ell\left(\mathbf{h}_i^{(\ell-1)}+\mathrm{MHA}_i^\ell\left(\mathbf{h}_1^{(\ell-1)},\ldots,\mathbf{h}_n^{(\ell-1)}\right)\right) \\
-\mathbf{h}_i^{(\ell)}& =\mathrm{BN}^\ell\left(\hat{\mathbf{h}}_i+\mathrm{FF}^\ell(\hat{\mathbf{h}}_i)\right). 
+\mathbf{h}_i^{(\ell)}& =\mathrm{BN}^\ell\left(\hat{\mathbf{h}}_i+\mathrm{FF}^\ell(\hat{\mathbf{h}}_i)\right)
 \end{aligned}$$
 
-这样得到了每个输入的输出，由于编码器有 $N=3$ 个layer，我们要进行3次这种运算，把上一层的输出作为下一层的输入。$\bar{\mathrm{h}}^{(N)} = \frac{1}{n}\sum_{i=1}^{n}\mathbf{h}_{i}^{(N)}$ 作为全局图嵌入。
+这样得到了每个输入的输出，由于编码器有 $N=3$ 个layer，我们要进行3次这种运算，把上一层的输出作为下一层的输入。把 $\bar{\mathrm{h}}^{(N)} = \frac{1}{n}\sum_{i=1}^{n}\mathbf{h}_{i}^{(N)}$ 作为全局图嵌入。
 
 ## 解码器(Decoder)
 在时间步 $t$ 时解码器的上下文嵌入来自于编码器直到 $t$ 时刻的输出。当 $t=1$ 时由于还没选择节点，我们把 $\mathbf{v}^{l}$ 和 $\mathbf{v}^{f}$ 作为输入的占位符
