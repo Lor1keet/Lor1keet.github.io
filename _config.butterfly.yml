@@ -54,7 +54,7 @@ disable_top_img: false
 index_img:
 
 # If the banner of page not setting, it will show the top_img
-default_top_img: https://pic.imgdb.cn/item/66ece841f21886ccc09928cd.jpg
+default_top_img: https://pic.imgdb.cn/item/670a59c3d29ded1a8ccf0834.jpg
 
 # The banner image of archive page
 archive_img: 
