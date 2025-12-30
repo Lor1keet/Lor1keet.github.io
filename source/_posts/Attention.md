@@ -2,17 +2,14 @@
 title: 利用Attention Model与RL解决Routing problem
 date: 2024-09-26 17:00:33
 tags: 
-- Reinforce Learing
-- Attention Model
-- 组合优化
+- Reinforcement Learning
+- Combinatorial Optimization
 categories:
-- Reinforce Learing
-- Attention Model
-- 组合优化
+- Reinforcement Learning
+- Combinatorial Optimization
 keywords:
-- Reinforce Learing
-- Attention Model
-- 组合优化
+- Reinforcement Learning
+- Combinatorial Optimization
 cover: https://pic.imgdb.cn/item/66f555f7f21886ccc00480a1.jpg
 description: 记录Attention Model解决TSP、VRP等问题的思路
 ---

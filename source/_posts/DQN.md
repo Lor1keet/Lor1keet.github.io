@@ -2,20 +2,19 @@
 title: RL算法之DQN与Dueling DQN
 date: 2024-09-22 20:43:46
 tags: 
-- Reinforce Learing
+- Reinforcement Learning
 categories:
-- Reinforce Learing
+- Reinforcement Learning
 keywords:
-- Reinforce Learing
+- Reinforcement Learning
 cover: https://pic.imgdb.cn/item/66f012e4f21886ccc0a82190.jpg
 description: 记录RL中的重要算法DQN及其改进变种
 ---
-
 # DQN
+
   DQN（Deep Q Network）是 Q-Learning 的神经网络形式，相比于普通的Q-Learning，它做出了如下的改进与性能优化：
 
-- 使用两个独立的神经网络：目标Q网络与当前Q网络，通过最小化损失函数来更新当前Q网络，当更新到达一定次数后，再更新目标Q网络。 
-
+- 使用两个独立的神经网络：目标Q网络与当前Q网络，通过最小化损失函数来更新当前Q网络，当更新到达一定次数后，再更新目标Q网络。
 - 引入经验回放池，将智能体的信息记录下来，并存储在一个回放缓冲区中。在训练时，从回放缓冲区中随机抽取一小批数据进行训练。这使样本满足独立假设，并提高样本的效率，每一个样本可以被使用多次，十分适合神经网络的梯度学习。
 
 ## DQN网络的更新原则
@@ -29,13 +28,9 @@ $$
 其中：
 
 - $\theta$ 是当前 Q 网络的参数
-  
 - $\theta_{\text{target}}$ 是目标 Q 网络的参数
-  
 - $s$ 和 $a$ 是当前状态和动作
-
 - $r$ 是即时奖励，$γ$ 是折扣因子
-  
 - $s'$ 是下一状态，$a'$ 是下一步动作
 
 ## DQN算法实现
@@ -48,7 +43,7 @@ class ReplayBuffer:
     def __init__(self,capacity):
         # collections.deque双端队列，支持从两端快速地添加和删除元素,当队列达到maxlen时移除最早的元素
         self.buffer = collections.deque(maxlen=capacity)
-        
+      
         # 将数据加入buffer
     def add(self,state,action,reward,next_state,done):
         self.buffer.append((state,action,reward,next_state,done))
@@ -60,7 +55,7 @@ class ReplayBuffer:
         # 解包transition，将同一维度的元素聚合在一起,如所有state放在一个state列表中
         state,action,reward,next_state,done = zip(*transitions)
         return np.array(state),action,reward,np.array(next_state),done
-    
+  
         # 检查当前buffer中的数据量
     def size(self):
         return len(self.buffer)
@@ -76,7 +71,7 @@ class Qnet(torch.nn.Module):
         super(Qnet,self).__init__()
         self.fc1 = torch.nn.Linear(state_dim,hidden_dim)
         self.fc2 = torch.nn.Linear(hidden_dim,action_dim)
-        
+      
         # 隐藏层使用ReLU激活函数（去负为0取最大）
     def forward(self,x):
         x = F.relu(self.fc1(x))
@@ -129,8 +124,8 @@ class DQN:
             # 返回state下每个动作的q值
             action = self.q_net.forward(state).argmax().item()
         return action
-        
-        
+      
+      
         # 参数更新   
     def update(self,transition_dict):
         # 将state转换为一个形状为(1, 4)的二维张量，以便将其输入到网络中
@@ -159,6 +154,7 @@ class DQN:
             self.taget_q_net.load_state_dict(self.q_net.state_dict()) 
         self.count += 1
 ```
+
 take_action函数利用ε-Greedy策略选择输入状态为state时下一步采取什么动作。
 
 update函数用于更新当前Q网络与目标Q网络的参数
@@ -241,7 +237,7 @@ for i in range(10):
                         agent.update(transition_dict)
                 # 在一个episode完成后在return_list中添加这一段的return
                 return_list.append(episode_return)
-                
+              
                 # 每10个episode打印一次统计信息
                 if (i_episode + 1) % 10 == 0:
                     pbar.set_postfix({
@@ -282,7 +278,9 @@ Dueling DQN是DQN的改进算法,它能够很好地学习到不同动作的差�
 
 我们定义$A(s,a)=Q(s,a)-V(s)$,$A(s,a)$为每个动作的优势函数。Dueling DQN将价值函数$V(s)$与优势函数$A(s,a)$分别建模，作为神经网络的两个不同分支来输出，然后求和得到Q值。将状态价值函数和优势函数分别建模的好处在于：某些情境下智能体只会关注状态的价值，而并不关心不同动作导致的差异，此时将二者分开建模能够使智能体更好地处理与动作关联较小的状态。
 
-$$Q(s, a) = V(s) + \left( A(s, a) - \frac{1}{|A|} \sum_{a'} A(s, a') \right)$$
+$$
+Q(s, a) = V(s) + \left( A(s, a) - \frac{1}{|A|} \sum_{a'} A(s, a') \right)
+$$
 
 这个公式中的修正部分$\left( A(s, a) - \frac{1}{|A|} \sum_{a'} A(s, a') \right)$表示从优势函数中减去其均值，从而保证所有动作的平均优势为零。Dueling DQN能更高效学习状态价值函数。每一次更新时，函数都会被更新，这也会影响到其他动作的Q值。而传统的DQN只会更新某个动作的Q值，其他动作的Q值就不会更新。因此，Dueling DQN能够更加频繁、准确地学习状态价值函数。
 
@@ -291,6 +289,7 @@ $$Q(s, a) = V(s) + \left( A(s, a) - \frac{1}{|A|} \sum_{a'} A(s, a') \right)$$
 #### 神经网络部分的修改
 
 修改为输出两个分支，再求和
+
 ```py
 class VAnet(torch.nn.Module):
     def __init__(self,state_dim,hidden_dim,action_dim):
@@ -346,12 +345,12 @@ class DQN:
             # item()将张量中的单个元素转为Python标量
             action = self.q_net.forward(state).argmax().item()
         return action
-    
+  
         # 寻找最大的q值
     def max_q_value(self,state):
         state = torch.tensor([state],dtype=float).to(self.device)
         return self.q_net(state).max().item()
-    
+  
     def update(self,transition_dict):
         states = torch.tensor(transition_dict['states'],dtype=torch.float).to(self.device)
         # actions转换为张量后仍然是一维，需要通过view(-1,1)reshape一下成为二维
@@ -361,7 +360,7 @@ class DQN:
         dones = torch.tensor(transition_dict['dones'],dtype=torch.float).view(-1,1).to(self.device)
         # 在动作维度，根据采取的动作的标号选取每个采样state的q
         q_values = self.q_net(states).gather(1,actions)
-        
+      
         # 判断使用的是DoubleDQN还是普通DQN
         # DoubleDQN先选取能取到最大q的action，然后用action更新目标网络的q
         # 普通DQN是直接获取最大的q更新目标网络
@@ -372,7 +371,7 @@ class DQN:
             max_next_q_values = self.target_q_net.forward(next_states).max(1)[0].view(-1, 1)
 
         q_targets = rewards + self.gamma * max_next_q_values * (1-dones)
-          
+        
         dqn_loss = torch.mean(F.mse_loss(q_values, q_targets))
         self.optimizer.zero_grad()
         dqn_loss.backward()
@@ -447,7 +446,7 @@ for i in range(10):
                         agent.update(transition_dict)
                 # 在一个episode完成后在return_list中添加这一段的return
                 return_list.append(episode_return)
-                
+              
                 # 每10个episode打印一次统计信息
                 if (i_episode + 1) % 10 == 0:
                     pbar.set_postfix({
@@ -477,7 +476,6 @@ plt.show()
 
 了解后发现，对于Cartpole环境来说，它的动作空间只有2维，复杂度很低，所以在这种情况下，Dueling DQN不能体现出优势，又由于相对DQN较复杂的神经网络运算方法，导致效率比较低。如果将环境换为更复杂的情况，那么收敛速度将明显快于DQN。
 {% endtip %}
-
 
 {% folding cyan,完整源代码点这里 %}
 {% link RL_Practice,https://github.com/Lor1keet/RL_Practice, %}

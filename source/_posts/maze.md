@@ -2,18 +2,20 @@
 title: 利用 gym 自定义迷宫环境与 DQN 训练实现
 date: 2024-10-17 20:27:03
 tags: 
-- Reinforce Learing
+- Reinforcement Learning
 categories:
-- Reinforce Learing
+- Reinforcement Learning
 keywords:
-- Reinforce Learing
+- Reinforcement Learning
 cover: https://pic.imgdb.cn/item/67110b74d29ded1a8c4f1371.jpg
 description: 记录自定义迷宫环境与利用DQN训练
 ---
 # 自定义环境
+
 gym 库提供了很多的内置环境，比如最常见的 Cartpole 车杆模型。但很多时候内置的环境无法满足我们需要的环境，这个时候可以在 gym 提供的框架基础上自定义环境。
 
 ## 代码
+
 这里以一个 5X5 的简单迷宫为例，从起点出发，撞墙或出界的奖励为-20，正常探索的奖励为-0.1，到达终点的奖励是50。
 
 ```py
@@ -28,11 +30,11 @@ class SimpleMazeEnv(gym.Env):
 
     def __init__(self):
         super(SimpleMazeEnv, self).__init__()
-        
+      
         # 定义迷宫的大小
         self.grid_size = 5
         self.maze = np.zeros((self.grid_size, self.grid_size), dtype=int)
-        
+      
         # 设置障碍物（墙壁）和目标
         self.maze[1, 2] = 1  # 墙壁
         self.maze[1, 3] = 1  # 墙壁
@@ -40,22 +42,22 @@ class SimpleMazeEnv(gym.Env):
         self.maze[3, 1] = 1  # 墙壁
         self.maze[3, 3] = 1  # 墙壁
         self.goal = (4, 4)   # 目标位置
-        
+      
         # 定义动作空间（上下左右）
         self.action_space = spaces.Discrete(4)
-        
+      
         # 定义观测空间（智能体的当前位置）
         self.observation_space = spaces.Box(low=0, high=self.grid_size-1, shape=(2,), dtype=np.int32)
-        
+      
         # 初始化智能体的位置
         self.agent_pos = np.array([0, 0])
-    
+  
     def reset(self, seed=None, options=None):
         """ 重置环境，返回初始观测和信息字典 """
         # 处理随机种子
         if seed is not None:
             np.random.seed(seed) 
-        
+      
         self.agent_pos = np.array([0, 0])  # 重置智能体位置
         return np.array(self.agent_pos, dtype=np.int32), {}  # 返回元组 (obs, info)
 
@@ -63,7 +65,7 @@ class SimpleMazeEnv(gym.Env):
         """ 根据动作更新智能体的位置，返回 (观测, 奖励, 是否结束, 额外信息) """
         # 保存原始位置
         old_pos = self.agent_pos.copy()
-        
+      
         # 根据动作更新位置（0:上, 1:右, 2:下, 3:左）
         if action == 0:   # 上
             self.agent_pos[0] = max(0, self.agent_pos[0] - 1)
@@ -90,29 +92,33 @@ class SimpleMazeEnv(gym.Env):
 
         return np.array(self.agent_pos, dtype=np.int32), reward, done, truncated, {}
 
-    
+  
     def render(self, mode='human'):
         """ 渲染环境 """
         maze_render = self.maze.copy()
         maze_render[tuple(self.agent_pos)] = 2  # 智能体位置为2
         maze_render[self.goal] = 3  # 目标位置为3
         print(maze_render)
-    
+  
     def close(self):
         """ 关闭环境 """
         pass
 ```
+
 环境中主要有五个模块
+
 - init 主要是初始化一些参数
 - reset 初始化环境
 - step 利用智能体的运动学模型和动力学模型计算下一步的状态和立即回报，并判断是否达到终止状态
 - render 绘图函数，可以为空，但必须存在
 - close 关闭图形页面
-  
+
 ## 添加自定义环境
+
 写好自定义环境的代码后，我们要将文件添加到库中。将文件保存为 maze.py ，在 ...\Lib\site-packages\gym\envs\classic_control 目录中新建一个文件夹（我取名为myenv），将 maze.py 保存在这个文件夹中。
 
 然后打开 ...\Lib\site-packages\gym\envs 目录下的 \__init__.py 文件，添加如下代码
+
 ```py
 register(
     id="Maze-v0", # 环境id可自定义，但是一定要加上-v0 代表版本号
@@ -123,12 +129,15 @@ register(
 ```
 
 在头文件中加入
+
 ```py
 from gym.envs.classic_control.myenv.maze import SimpleMazeEnv
 ```
+
 到此就完成了自定义环境的引入！
 
 # 训练
+
 参考 {% post_link DQN %}
 只需把主程序中的 env_name 改为
 
@@ -203,6 +212,7 @@ env_name = 'Maze-v0'
     plt.title('DQN on {}'.format(env_name))
     plt.show()
 ```
+
 得到
 {% image https://pic.imgdb.cn/item/67110ab9d29ded1a8c4e7e06.png, width=400px %}
 {% image https://pic.imgdb.cn/item/67110afbd29ded1a8c4eb436.png, width=400px %}

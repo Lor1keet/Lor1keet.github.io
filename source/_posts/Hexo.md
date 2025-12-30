@@ -2,11 +2,11 @@
 title: Hexo博客搭建与魔改汇总
 date: 2024-09-19 21:21:44
 tags: 
-- Hexo
+- Blog
 categories:
-- Hexo
+- Blog
 keywords:
-- Hexo
+- Blog
 cover: https://pic.imgdb.cn/item/66ed2ba7f21886ccc0ebc562.jpg
 description: 起点
 ---

@@ -2,26 +2,29 @@
 title: RL算法之Actor-Critic
 date: 2024-09-23 20:25:14
 tags: 
-- Reinforce Learing
+- Reinforcement Learning
 categories:
-- Reinforce Learing
+- Reinforcement Learning
 keywords:
-- Reinforce Learing
+- Reinforcement Learning
 cover: https://pic.imgdb.cn/item/66f1666df21886ccc0d839b2.jpg
 description: 记录RL中的重要算法Actor-Critic及其改进
 ---
-
 # AC算法
+
 在REINFORCE算法中，目标函数的梯度中有一项轨迹回报，用于指导策略的更新。REINFOCE算法用蒙特卡洛方法来估计$Q(s,a)$,而AC使用TD（时序差分）方法来估计。
 
 AC算法的核心思想是同时使用两个部分：Actor（策略网络）和 Critic（价值网络）
+
 - Actor要做的是与环境交互，并在Critic价值函数的指导下用策略梯度学习一个更好的策略
 - Critic要做的是通过Actor与环境交互收集的数据学习一个价值函数，这个价值函数会用于判断在当前状态什么动作是好的，什么动作不是好的，进而帮助Actor进行策略更新
 
 直接引入A2C（Advantage Actor-Critic）算法。
 
 # A2C算法（Advantage Actor-Critic）
+
 我们在最基本的AC算法中添加一项$b(S)$,作为baseline
+
 $$
 \begin{aligned}
 \nabla_{\theta}J(\theta)& =\mathbb{E}_{S\sim\eta,A\sim\pi}\left[\nabla_{\theta}\operatorname{ln}\pi(A|S,\theta_{t})q_{\pi}(S,A)\right] \\
@@ -30,19 +33,28 @@ $$
 $$
 
 通常$b(s)=v_{\pi}(s)$。然后通过梯度上升得到
-$$\begin{aligned}
+
+$$
+\begin{aligned}
 \theta_{t+1}& =\theta_t+\alpha\mathbb{E}\bigg[\nabla_\theta\ln\pi(A|S,\theta_t)[q_\pi(S,A)-v_\pi(S)]\bigg] \\
 &\doteq\theta_t+\alpha\mathbb{E}\Big[\nabla_\theta\ln\pi(A|S,\theta_t)\delta_\pi(S,A)\Big]
-\end{aligned}$$
+\end{aligned}
+$$
 
 运用SGD得到
-$$\begin{aligned}
+
+$$
+\begin{aligned}
 \theta_{t+1}& \begin{aligned}=\theta_t+\alpha\nabla_\theta\ln\pi(a_t|s_t,\theta_t)[q_t(s_t,a_t)-v_t(s_t)]\end{aligned} \\
 &=\theta_t+\alpha\nabla_\theta\ln\pi(a_t|s_t,\theta_t)\delta_t(s_t,a_t)
-\end{aligned}$$
+\end{aligned}
+$$
 
 将$\delta_t$替换为TD error
-$$\delta_t=q_t(s_t,a_t)-v_t(s_t)\to r_{t+1}+\gamma v_t(s_{t+1})-v_t(s_t)$$
+
+$$
+\delta_t=q_t(s_t,a_t)-v_t(s_t)\to r_{t+1}+\gamma v_t(s_{t+1})-v_t(s_t)
+$$
 
 ## 伪代码
 
@@ -50,7 +62,7 @@ $$\delta_t=q_t(s_t,a_t)-v_t(s_t)\to r_{t+1}+\gamma v_t(s_{t+1})-v_t(s_t)$$
 
 **Aim**: Search for an optimal policy by maximizing $J(\theta)$.
 
-At time step $t$ in each episode, do 
+At time step $t$ in each episode, do
 
 &nbsp;&nbsp;&nbsp;&nbsp;Generate $a_t$ following $\pi(a | s_t, \theta_t)$ and then observe $r_{t+1}, s_{t+1}$.
 
@@ -66,9 +78,10 @@ At time step $t$ in each episode, do
 
 &nbsp;&nbsp;&nbsp;&nbsp;$\theta_{t+1} = \theta_t + \alpha_\theta \delta_t \nabla_\theta \ln \pi(a_t | s_t, \theta_t)$
 
-
 ### 代码实现
+
 #### 定义策略网络与价值网络
+
 ```py
 # 策略网络
 class PolicyNet(torch.nn.Module):
@@ -95,6 +108,7 @@ class ValueNet(torch.nn.Module):
 ```
 
 #### 定义Actor-Critic算法
+
 ```py
 class ActorCritic:
     def __init__(self,state_dim,hidden_dim,action_dim,actor_lr,critic_lr,gamma,device):
@@ -115,7 +129,7 @@ class ActorCritic:
         action_dist = torch.distributions.Categorical(probs)
         action = action_dist.sample()
         return action.item()
-    
+  
     def update(self,transition_dict):
         states = torch.tensor(transition_dict['states'],dtype=torch.float).to(self.device)
         actions = torch.tensor(transition_dict['actions']).view(-1, 1).to(self.device)
@@ -136,7 +150,9 @@ class ActorCritic:
         self.actor_optimizer.step()  # 更新策略网络的参数
         self.critic_optimizer.step()  # 更新价值网络的参数
 ```
+
 #### 开始训练
+
 ```py
 actor_lr = 1e-3
 critic_lr = 1e-2
@@ -209,6 +225,7 @@ plt.ylabel('Returns')
 plt.title('Actor-Critic on {}'.format(env_name))
 plt.show()
 ```
+
 运行代码，得到
 
 {% image https://pic.imgdb.cn/item/66f673c7f21886ccc0fa6236.png, width=400px %}
@@ -216,4 +233,5 @@ plt.show()
 根据实验结果我们可以发现，Actor-Critic 算法很快便能收敛到最优策略，并且训练过程非常稳定，抖动情况相比 REINFORCE 算法有了明显的改进，这说明价值函数的引入减小了方差。
 
 # SAC（Soft Actor-Critic）
+
 - 未完待续
